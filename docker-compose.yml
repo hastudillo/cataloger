@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  cataloger:
+    container_name: cataloger
+    build: .
+    expose:
+      - "80"
+    ports:
+      - 80:80

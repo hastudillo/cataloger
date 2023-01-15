@@ -2,26 +2,33 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
+## Installation
+
+This project has been developed using `npm` as a package manager. I should work with other package managers (such as yarn or pnpm...). Run `npm install` or similar to prepare you project to be run.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Running in any environment
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+A `Dockerfile` file has been added to prepare get the project ready to be run in any environment.
 
-## Running end-to-end tests
+```bash
+$ docker build -t cataloger .
+$ docker run --name cataloger -p 80:80 cataloger
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Navigate to `http://localhost/`.
 
-## Further help
+A `docker-compose.yml` can make the task even easier:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+$ docker-compose up
+```
+
+NB. In order to run this project along with the BE side, please refer to `cataloger_backend`.

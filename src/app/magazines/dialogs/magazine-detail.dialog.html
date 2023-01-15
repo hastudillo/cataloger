@@ -1,0 +1,78 @@
+<ng-container *ngIf="data?._id; else new">
+  <h1 mat-dialog-title>Details</h1>
+</ng-container>
+<ng-template #new>
+  <h1 mat-dialog-title>New magazine</h1>
+</ng-template>
+
+<div mat-dialog-content class="magazine-detail-dialog-content">
+  <mat-form-field appearance="outline" class="mat-form-field-outlined mat-form-field-large">
+    <mat-label>Editors</mat-label>
+    <input type="text" matInput [ngModel]="data?.editors" (ngModelChange)="data && data.editors=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined mat-form-field-medium">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput [ngModel]="data?.name" (ngModelChange)="data && data.name=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined">
+    <mat-label>Volume</mat-label>
+    <input type="text" matInput [ngModel]="data?.volume" (ngModelChange)="data && data.volume=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined">
+    <mat-label>Issue</mat-label>
+    <input type="text" matInput [ngModel]="data?.issue" (ngModelChange)="data && data.issue=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined mat-form-field-large">
+    <mat-label>Details</mat-label>
+    <textarea matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="5"
+      [ngModel]="data?.details" (ngModelChange)="data && data.details=$event"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined">
+    <mat-label>City</mat-label>
+    <input type="text" matInput
+      [ngModel]="data?.city" (ngModelChange)="data && data.city=$event"
+    >
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined">
+    <mat-label>Publisher</mat-label>
+    <input type="text" matInput [ngModel]="data?.publisher" (ngModelChange)="data && data.publisher=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="01/01/1970" [ngModel]="data?.date" (ngModelChange)="data && data.date=$event">
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined mat-form-field-medium"
+    [color]="issnWarning ? 'warn' : 'primary'">
+    <mat-label>ISSN</mat-label>
+    <input type="text" matInput [ngModel]="data?.issn" (ngModelChange)="data && data.issn=$event"
+      (keyup)="verifyIssn(data?.issn)">
+    <mat-hint [hidden]="!issnWarning" class="mat-hint-as-err">
+      {{ issnWarning }}
+    </mat-hint>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button [mat-dialog-close]="data" color="primary"
+    [disabled]="issnWarning === nonValidIssn">
+    Save
+  </button>
+  <button mat-flat-button mat-dialog-close color="warn">
+    Cancel
+  </button>
+</div>

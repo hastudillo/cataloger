@@ -1,0 +1,53 @@
+<ng-container *ngIf="data?._id; else new">
+  <h1 mat-dialog-title>Details</h1>
+</ng-container>
+<ng-template #new>
+  <h1 mat-dialog-title>New book</h1>
+</ng-template>
+
+<div mat-dialog-content class="book-detail-dialog-content">
+  <mat-form-field appearance="outline" class="mat-form-field-outlined mat-form-field-medium">
+    <mat-label>Author</mat-label>
+    <input type="text" matInput [ngModel]="data?.author" (ngModelChange)="data && data.author=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined mat-form-field-large">
+    <mat-label>Title</mat-label>
+    <input type="text" matInput [ngModel]="data?.title" (ngModelChange)="data && data.title=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined">
+    <mat-label>City</mat-label>
+    <input type="text" matInput [ngModel]="data?.city" (ngModelChange)="data && data.city=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined">
+    <mat-label>Publisher</mat-label>
+    <input type="text" matInput [ngModel]="data?.publisher" (ngModelChange)="data && data.publisher=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined">
+    <mat-label>Date</mat-label>
+    <input type="number" matInput placeholder="1970" [ngModel]="data?.date" (ngModelChange)="data && data.date=$event">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field-outlined mat-form-field-medium"
+    [color]="isbnWarning ? 'warn' : 'primary'">
+    <mat-label>ISBN</mat-label>
+    <input type="text" matInput [ngModel]="data?.isbn" (ngModelChange)="data && data.isbn=$event"
+      (keyup)="verifyIsbn(data?.isbn)">
+    <mat-hint [hidden]="!isbnWarning" class="mat-hint-as-err">
+      {{ isbnWarning }}
+    </mat-hint>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button [mat-dialog-close]="data" color="primary"
+    [disabled]="isbnWarning === nonValidIsbn">
+    Save
+  </button>
+  <button mat-flat-button mat-dialog-close color="warn">
+    Cancel
+  </button>
+</div>

@@ -1,0 +1,16 @@
+button.fab-new {
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+  z-index: 1;
+}
+
+table {
+  width: 100%;
+  td.mat-column-actions {
+    padding: 0;
+    div {
+      text-align: center;
+    }
+  }
+}

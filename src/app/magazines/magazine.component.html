@@ -1,0 +1,52 @@
+<!-- FAB new -->
+<button mat-fab color="primary" class="fab-new" (click)="openMagazineDetailDialog()">
+  <mat-icon>add</mat-icon>
+</button>
+
+<!-- Table -->
+<ng-container>
+  <table mat-table [dataSource]="dataSource$" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="editors">
+      <th mat-header-cell *matHeaderCellDef> Editors </th>
+      <td mat-cell *matCellDef="let element"> {{element.editors.split(';').shift() + '...'}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="volume">
+      <th mat-header-cell *matHeaderCellDef> Volume </th>
+      <td mat-cell *matCellDef="let element"> {{element.volume}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="issue">
+      <th mat-header-cell *matHeaderCellDef> Issue </th>
+      <td mat-cell *matCellDef="let element"> {{element.issue}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element" class="mat-column-actions">
+        <div>
+          <button mat-icon-button (click)="openMagazineDetailDialog(element)">
+            <mat-icon color="primary">library_books</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openDeleteDialog(element)">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>  
+</ng-container>
